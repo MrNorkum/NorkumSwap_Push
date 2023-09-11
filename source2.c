@@ -35,22 +35,6 @@ int	get_middle(int *pivot, t_lst *lst, int len)
 	return (*pivot = arr[len / 2], free(arr), 1);
 }
 
-int	stack_min(t_ps *ps)
-{
-	t_lst	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = ps->a;
-	while (tmp->next)
-	{
-		if (tmp->nbr > tmp->next->nbr)
-			i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
 int	my_atoi(t_ps *ps, const char *str, int sign, long res)
 {
 	while ((9 <= *str && *str <= 13) || *str == 32)

@@ -1,5 +1,54 @@
 #include "push_swap.h"
 
+static inline int	isnumeric(char *str)
+{
+	if (*str == 43 || *str == 45)
+		str++;
+	if (!*str)
+		return (0);
+	while (*str)
+		if (!('0' <= *str && *str++ <= '9'))
+			return (0);
+	return (1);
+}
+
+static inline int	repeat(t_lst *stack, int nbr)
+{
+	if (!stack)
+		return (0);
+	if (stack->nbr == nbr)
+		return (1);
+	return (repeat(stack->next, nbr));
+}
+
+void	push_swap(t_ps *ps)
+{
+	int	i;
+	int	num;
+
+	i = -1;
+	while (++i < ps->count)
+	{
+		if (!isnumeric(ps->arr[i]))
+		{
+			if (ps->has_split)
+				free_malloc(ps->arr, 0);
+			return (ft_printf("Error\n"), exit(1));
+		}
+	}
+	while (--i > -1)
+	{
+		num = my_atoi(ps, ps->arr[i], 1, 0);
+		if (repeat(ps->a, num))
+			return (ft_printf("Error\n"), free_function(ps), exit(1));
+		lstpush(&ps->a, num);
+	}
+	if (2 <= ps->count && ps->count <= 3)
+		sort(ps, ps->count);
+	else if (ps->count <= 4)
+		quicksort_a(ps, ps->count, 0);
+}
+
 int	main(int ac, char **av)
 {
 	t_ps	ps;

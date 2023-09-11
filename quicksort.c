@@ -49,8 +49,7 @@ void	quicksort_3b(t_ps *ps, int len)
 	}
 	else if (len == 3)
 	{
-		while (len || !(ps->a->nbr < ps->a->next->nbr
-				&& ps->a->next->nbr < ps->a->next->next->nbr))
+		while (len)
 		{
 			if (len == 1 && ps->a->nbr > ps->a->next->nbr)
 				ft_printf("sa%c", s(&ps->a));

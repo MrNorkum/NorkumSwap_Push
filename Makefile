@@ -10,8 +10,7 @@ AR				=	ar
 ARFLAGS 		=	rcs
 RM				=	rm -rf
 
-SRC				=	push_swap.c	\
-					source.c	\
+SRC				=	source.c	\
 					source1.c	\
 					source2.c	\
 					quicksort.c
