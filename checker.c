@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	first_part(t_ps *ps, char *line)
+static inline int	first_part(t_ps *ps, char *line)
 {
 	if (!ft_strncmp(line, "sa\n", 3))
 		s(&ps->a);
@@ -23,7 +23,7 @@ int	first_part(t_ps *ps, char *line)
 	return (1);
 }
 
-int	second_part(t_ps *ps, char *line)
+static inline int	second_part(t_ps *ps, char *line)
 {
 	if (!ft_strncmp(line, "ss\n", 3))
 	{
@@ -45,7 +45,7 @@ int	second_part(t_ps *ps, char *line)
 	return (1);
 }
 
-int	checker_control(t_ps *ps)
+static inline int	checker_control(t_ps *ps)
 {
 	char	*line;
 
@@ -69,7 +69,7 @@ int	checker_control(t_ps *ps)
 	return (1);
 }
 
-int	checker(t_ps *ps)
+static inline int	checker(t_ps *ps)
 {
 	int	i;
 	int	num;
