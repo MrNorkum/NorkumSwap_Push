@@ -70,3 +70,4 @@ int	get_middle(int *pivot, t_lst *lst, int len)
 	ft_sort_int_tab(arr, len);
 	return (*pivot = arr[len / 2], free(arr), 1);
 }
+
