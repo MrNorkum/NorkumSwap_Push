@@ -1,5 +1,26 @@
 #include "push_swap.h"
 
+int	isnumeric(char *str)
+{
+	if (*str == 43 || *str == 45)
+		str++;
+	if (!*str)
+		return (0);
+	while (*str)
+		if (!('0' <= *str && *str++ <= '9'))
+			return (0);
+	return (1);
+}
+
+int	repeat(t_lst *stack, int nbr)
+{
+	if (!stack)
+		return (0);
+	if (stack->nbr == nbr)
+		return (1);
+	return (repeat(stack->next, nbr));
+}
+
 int	is_sorted(t_lst *lst, char c, int len)
 {
 	while (c == 'a' && --len)
