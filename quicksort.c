@@ -1,3 +1,5 @@
+#include "push_swap.h"
+
 void	sort(t_ps *ps, int len)
 {
 	int	a;
@@ -61,6 +63,32 @@ void	quicksort_3b(t_ps *ps, int len)
 	return ;
 }
 
+int	quicksort_b(t_ps *ps, int len, int count)
+{
+	int	pivot;
+	int	items;
+
+	if (!count && is_sorted(ps->b, 'b', len))
+		while (len--)
+			ft_printf("pa%c", p(&ps->b, &ps->a));
+	if (len <= 3)
+		return (quicksort_3b(ps, len), 1);
+	items = len;
+	if (!get_middle(&pivot, ps->b, len))
+		return (0);
+	while (len != items / 2)
+	{
+		if (ps->b->nbr >= pivot && len--)
+			ft_printf("pa%c", p(&ps->b, &ps->a));
+		else if (++count)
+			ft_printf("rb%c", r(ps->b));
+	}
+	while (items / 2 != lstsize(ps->b) && count--)
+		ft_printf("rrb%c", rr(ps->b));
+	return (quicksort_a(ps, items / 2 + items % 2, 0)
+		&& quicksort_b(ps, items / 2, 0));
+}
+
 int	quicksort_a(t_ps *ps, int len, int count)
 {
 	int	pivot;
@@ -86,32 +114,6 @@ int	quicksort_a(t_ps *ps, int len, int count)
 	}
 	while (items / 2 + items % 2 != lstsize(ps->a) && count--)
 		ft_printf("rra%c", rr(ps->a));
-	return (quicksort_a(ps, items / 2 + items % 2, 0)
-		&& quicksort_b(ps, items / 2, 0));
-}
-
-int	quicksort_b(t_ps *ps, int len, int count)
-{
-	int	pivot;
-	int	items;
-
-	if (!count && is_sorted(ps->b, 'b', len))
-		while (len--)
-			ft_printf("pa%c", p(&ps->b, &ps->a));
-	if (len <= 3)
-		return (quicksort_3b(ps, len), 1);
-	items = len;
-	if (!get_middle(&pivot, ps->b, len))
-		return (0);
-	while (len != items / 2)
-	{
-		if (ps->b->nbr >= pivot && len--)
-			ft_printf("pa%c", p(&ps->b, &ps->a));
-		else if (++count)
-			ft_printf("rb%c", r(ps->b));
-	}
-	while (items / 2 != lstsize(ps->b) && count--)
-		ft_printf("rrb%c", rr(ps->b));
 	return (quicksort_a(ps, items / 2 + items % 2, 0)
 		&& quicksort_b(ps, items / 2, 0));
 }
