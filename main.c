@@ -19,12 +19,12 @@ static inline void	push_swap(t_ps *ps)
 	{
 		num = my_atoi(ps, ps->arr[i], 1, 0);
 		if (repeat(ps->a, num))
-			return (ft_printf("Error\n"), free_function(ps), exit(1));
+			return (ft_printf("Error\n"), exit(1));
 		lstpush(&ps->a, num);
 	}
 	if (2 <= ps->count && ps->count <= 3)
 		sort(ps, ps->count);
-	else if (ps->count <= 4)
+	else if (ps->count > 3)
 		quicksort_a(ps, ps->count, 0);
 }
 
