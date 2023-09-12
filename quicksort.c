@@ -1,5 +1,3 @@
-#include "push_swap.h"
-
 void	sort(t_ps *ps, int len)
 {
 	int	a;
