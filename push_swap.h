@@ -38,6 +38,5 @@ int		is_sorted(t_lst *lst, char c, int len);
 void	sort(t_ps *ps, int len);
 int		isnumeric(char *str);
 int		repeat(t_lst *stack, int nbr);
-void	push_swap(t_ps *ps);
 
 #endif
