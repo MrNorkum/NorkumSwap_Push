@@ -1,27 +1,6 @@
 #include "push_swap.h"
 
-static inline int	isnumeric(char *str)
-{
-	if (*str == 43 || *str == 45)
-		str++;
-	if (!*str)
-		return (0);
-	while (*str)
-		if (!('0' <= *str && *str++ <= '9'))
-			return (0);
-	return (1);
-}
-
-static inline int	repeat(t_lst *stack, int nbr)
-{
-	if (!stack)
-		return (0);
-	if (stack->nbr == nbr)
-		return (1);
-	return (repeat(stack->next, nbr));
-}
-
-void	push_swap(t_ps *ps)
+static inline void	push_swap(t_ps *ps)
 {
 	int	i;
 	int	num;
