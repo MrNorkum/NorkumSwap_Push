@@ -58,3 +58,4 @@ void	free_function(t_ps *ps)
 	lstclear(&ps->a);
 	lstclear(&ps->b);
 }
+
