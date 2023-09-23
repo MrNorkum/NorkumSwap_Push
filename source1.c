@@ -51,11 +51,12 @@ void	lstclear(t_lst **lst)
 	}
 }
 
-void	free_function(t_ps *ps)
+void	free_function(t_ps *ps, int e)
 {
 	if (ps->has_split)
 		free_malloc(ps->arr, 0);
 	lstclear(&ps->a);
 	lstclear(&ps->b);
+	exit(e);
 }
 
