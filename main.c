@@ -19,7 +19,7 @@ static inline void	push_swap(t_ps *ps)
 	{
 		num = my_atoi(ps, ps->arr[i], 1, 0);
 		if (repeat(ps->a, num))
-			return (ft_printf("Error\n"), exit(1));
+			return (ft_printf("Error\n"), free_function(ps, 1));
 		lstpush(&ps->a, num);
 	}
 	if (2 <= ps->count && ps->count <= 3)
@@ -50,7 +50,7 @@ int	main(int ac, char **av)
 		ps.arr = av + 1;
 		ps.count = ac - 1;
 	}
-	return (push_swap(&ps), free_function(&ps), 0);
+	return (push_swap(&ps), free_function(&ps, 0), 0);
 }
 
 /*while (ps.a)
