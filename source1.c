@@ -57,6 +57,7 @@ void	free_function(t_ps *ps, int e)
 		free_malloc(ps->arr, 0);
 	lstclear(&ps->a);
 	lstclear(&ps->b);
-	exit(e);
+	if (e == 1)
+		exit(1);
 }
 
