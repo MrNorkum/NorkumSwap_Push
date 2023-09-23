@@ -59,7 +59,7 @@ static inline int	checker_control(t_ps *ps)
 		else
 		{
 			ft_printf("\033[0;33mError\n");
-			return (free(line), free_function(ps), 1);
+			return (free(line), free_function(ps, 0), 1);
 		}
 		free(line);
 		line = get_next_line(0);
@@ -88,7 +88,7 @@ static inline int	checker(t_ps *ps)
 	{
 		num = my_atoi(ps, ps->arr[i], 1, 0);
 		if (repeat(ps->a, num))
-			return (ft_printf("\033[0;33mError\n"), exit(1), 1);
+			return (ft_printf("\033[0;33mError\n"), free_function(ps, 1), 1);
 		lstpush(&ps->a, num);
 	}
 	if (checker_control(ps))
@@ -118,5 +118,5 @@ int	main(int ac, char **av)
 		ps.arr = av + 1;
 		ps.count = ac - 1;
 	}
-	return (checker(&ps), free_function(&ps), 0);
+	return (checker(&ps), free_function(&ps, 0), 0);
 }
