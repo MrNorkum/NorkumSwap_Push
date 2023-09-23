@@ -23,7 +23,7 @@ int	my_atoi(t_ps *ps, const char *str, int sign, long res)
 	while (48 <= *str && *str <= 57)
 		res = res * 10 + *str++ - 48;
 	if (res * sign < -2147483648 || res * sign > 2147483647)
-		return (free_function(ps), ft_printf("Error\n"), exit(1), 0);
+		return (ft_printf("Error\n"), free_function(ps, 1), 0);
 	return (res * sign);
 }
 
@@ -70,4 +70,3 @@ int	get_middle(int *pivot, t_lst *lst, int len)
 	ft_sort_int_tab(arr, len);
 	return (*pivot = arr[len / 2], free(arr), 1);
 }
-

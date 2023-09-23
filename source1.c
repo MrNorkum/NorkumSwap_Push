@@ -60,4 +60,3 @@ void	free_function(t_ps *ps, int e)
 	if (e == 1)
 		exit(1);
 }
-

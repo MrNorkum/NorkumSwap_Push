@@ -58,7 +58,7 @@ static inline int	checker_control(t_ps *ps)
 			;
 		else
 		{
-			ft_printf("\033[0;33mError\n");
+			ft_printf("\033[0;33mError\n\033[0;0m");
 			return (free(line), free_function(ps, 1), 1);
 		}
 		free(line);
@@ -69,7 +69,7 @@ static inline int	checker_control(t_ps *ps)
 	return (1);
 }
 
-static inline int	checker(t_ps *ps)
+static inline void	checker(t_ps *ps)
 {
 	int	i;
 	int	num;
@@ -81,19 +81,19 @@ static inline int	checker(t_ps *ps)
 		{
 			if (ps->has_split)
 				free_malloc(ps->arr, 0);
-			return (ft_printf("\033[0;33mError\n"), exit(1), 1);
+			return (ft_printf("\033[0;33mError\n\033[0;0m"), exit(1));
 		}
 	}
 	while (--i > -1)
 	{
 		num = my_atoi(ps, ps->arr[i], 1, 0);
 		if (repeat(ps->a, num))
-			return (ft_printf("\033[0;33mError\n"), free_function(ps, 1), 1);
+			return (ft_printf("\033[0;33mError\n\033[0;0m"), free_function(ps, 1));
 		lstpush(&ps->a, num);
 	}
 	if (checker_control(ps))
-		return (ft_printf("\033[0;32mOK\n"), 0);
-	return (ft_printf("\033[0;31mKO\n"), 1);
+		return (ft_printf("\033[0;32mOK\n\033[0;0m"), free_function(ps, 1));
+	return (ft_printf("\033[0;31mKO\n\033[0;0m"), free_function(ps, 1));
 }
 
 int	main(int ac, char **av)
@@ -109,7 +109,7 @@ int	main(int ac, char **av)
 	{
 		ps.arr = ft_split(av[1], 32);
 		if (!ps.arr)
-			return (ft_printf("\033[0;33mError\n"), 1);
+			return (ft_printf("\033[0;33mError\n\033[0;0m"), 1);
 		ps.has_split = 1;
 		ps.count = wc(av[1], 32);
 	}
@@ -118,5 +118,5 @@ int	main(int ac, char **av)
 		ps.arr = av + 1;
 		ps.count = ac - 1;
 	}
-	return (checker(&ps), free_function(&ps, 0), 0);
+	return (checker(&ps), 0);
 }

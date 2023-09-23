@@ -29,7 +29,7 @@ typedef struct s_ps
 	int		count;
 }			t_ps;
 
-void	free_function(t_ps *ps);
+void	free_function(t_ps *ps, int e);
 int		isnumeric(char *str);
 int		my_atoi(t_ps *ps, const char *str, int sign, long res);
 int		repeat(t_lst *stack, int nbr);
