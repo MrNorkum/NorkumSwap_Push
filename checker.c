@@ -59,7 +59,7 @@ static inline int	checker_control(t_ps *ps)
 		else
 		{
 			ft_printf("\033[0;33mError\n");
-			return (free(line), free_function(ps, 0), 1);
+			return (free(line), free_function(ps, 1), 1);
 		}
 		free(line);
 		line = get_next_line(0);
