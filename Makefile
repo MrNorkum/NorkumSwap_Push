@@ -1,51 +1,69 @@
-NAME			=	push_swap.a
-NAME2			=	push_swap
-NAME3			=	checker
-NAME4			=	main.c
-NAME5			=	checker.c
+NAME = push_swap.a
+BONUS = checker
+BONUS_SRC = checker.c
+PUSH_SWAP = push_swap
+MAIN_SRC = main.c
+LIBMY_PATH = ./libmy
+LIBMY = $(LIBMY_PATH)/libmy.a
+AR = ar rc
+CC = gcc
+FLAG = -Wall -Wextra -Werror
+CMPL = $(CC) $(FLAG) -c
 
-CC				=	gcc
-CFLAGS			=	-Wall -Wextra -Werror
-AR				=	ar
-ARFLAGS 		=	rcs
-RM				=	rm -rf
+RM = rm -rf
+MKDIR = mkdir -p
 
-SRC				=	source.c	\
-					source1.c	\
-					source2.c	\
-					quicksort.c
+SRC =	source.c	\
+		source1.c	\
+		source2.c	\
+		quicksort.c
 
-OBJ_DIR			=	obj
-OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJ = $(addprefix $(OBJDIR)/,$(notdir $(SRC:.c=.o)))
+OBJDIR = OBJECTS
 
-LIBFT_PATH		=	./libft
-LIBFT			=	$(LIBFT_PATH)/libft.a
+$(OBJDIR)/%.o:  %.c
+	@$(MKDIR) $(OBJDIR)
+	@$(CMPL) $< -o $@
 
-$(OBJ_DIR)/%.o:		%.c
-					$(CC) $(CFLAGS) -c $< -o $@
+all: $(NAME)
+a: all
 
-all:				$(NAME)
+$(NAME): $(OBJ)
+	@make -C $(LIBMY_PATH) all
+	@$(AR) $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@$(CC) $(FLAG) $(NAME) $(LIBMY) $(MAIN_SRC) -o $(PUSH_SWAP)
 
-$(NAME):			$(LIBFT) $(OBJ_DIR) $(OBJS)
-				cp	$(LIBFT) $(NAME)
-					$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-					$(CC) $(CFLAGS) -o $(NAME2) $(NAME) $(NAME4)
-					$(CC) $(CFLAGS) -o $(NAME3) $(NAME) $(NAME5)
+b: bonus
+bonus: $(OBJ)
+	@make -C $(LIBMY_PATH) all
+	@$(AR) $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@$(CC) $(FLAG) $(NAME) $(LIBMY) $(MAIN_SRC) -o $(PUSH_SWAP)
+	@$(CC) $(FLAG) $(NAME) $(LIBMY) $(BONUS_SRC) -o $(BONUS)
 
-$(LIBFT):
-					make -C $(LIBFT_PATH) all
-
-$(OBJ_DIR):
-					mkdir -p $(OBJ_DIR)
-
+c: clean
 clean:
-					make -C $(LIBFT_PATH) clean
-					$(RM) $(OBJ_DIR) $(NAME)
+	@make -C $(LIBMY_PATH) clean
+	@$(RM) $(OBJDIR)
 
-fclean:				clean
-					make -C $(LIBFT_PATH) fclean
-					$(RM) $(NAME2) $(NAME3)
+f: fclean
+fclean :
+	@make -C $(LIBMY_PATH) fclean
+	@$(RM) $(OBJDIR)
+	@$(RM) $(PUSH_SWAP)
+	@$(RM) $(BONUS)
+	@$(RM) $(NAME)
 
-re:					fclean all
+re: fclean all
 
-.PHONY:				all clean fclean re libft
+r:
+	@make re
+	@make clean
+
+n: norm
+norm:
+	@norminette
+
+.PHONY: all clean fclean re bonus
+

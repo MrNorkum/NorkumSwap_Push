@@ -1,56 +1,56 @@
 #include "push_swap.h"
 
-static inline void	push_swap(t_ps *ps)
+static inline void	push_swap(program_t *x)
 {
 	int	i;
 	int	num;
 
 	i = -1;
-	while (++i < ps->count)
+	while (++i < x->count)
 	{
-		if (!isnumeric(ps->arr[i]))
+		if (!isnumeric(x->arr[i]))
 		{
-			if (ps->has_split)
-				free_malloc(ps->arr, 0);
-			return (ft_printf("Error\n"), exit(1));
+			if (x->has_split)
+				my_free(x->arr, 0);
+			return (my_printf("Error\n"), exit(1));
 		}
 	}
 	while (--i > -1)
 	{
-		num = my_atoi(ps, ps->arr[i], 1, 0);
-		if (repeat(ps->a, num))
-			return (ft_printf("Error\n"), free_function(ps, 1));
-		lstpush(&ps->a, num);
+		num = my_atoi(x, x->arr[i], 1, 0);
+		if (repeat(x->a, num))
+			return (my_printf("Error\n"), free_function(x, 1));
+		lstpush(&x->a, num);
 	}
-	if (2 <= ps->count && ps->count <= 3)
-		sort(ps, ps->count);
-	else if (ps->count > 3)
-		quicksort_a(ps, ps->count, 0);
+	if (2 <= x->count && x->count <= 3)
+		sort(x, x->count);
+	else if (x->count > 3)
+		quicksort_a(x, x->count, 0);
 }
 
 int	main(int ac, char **av)
 {
-	t_ps	ps;
+	program_t	x;
 
-	ps.a = NULL;
-	ps.b = NULL;
-	ps.has_split = 0;
+	x.a = NULL;
+	x.b = NULL;
+	x.has_split = 0;
 	if (ac == 1)
 		return (0);
 	else if (ac == 2)
 	{
-		ps.arr = ft_split(av[1], 32);
-		if (!ps.arr)
-			return (ft_printf("Error\n"), 1);
-		ps.has_split = 1;
-		ps.count = wc(av[1], 32);
+		x.arr = my_split(av[1], 32);
+		if (!x.arr)
+			return (my_printf("Error\n"), 1);
+		x.has_split = 1;
+		x.count = word_count(av[1], 32);
 	}
 	else
 	{
-		ps.arr = av + 1;
-		ps.count = ac - 1;
+		x.arr = av + 1;
+		x.count = ac - 1;
 	}
-	return (push_swap(&ps), free_function(&ps, 0), 0);
+	return (push_swap(&x), free_function(&x, 0), 0);
 }
 
 /*while (ps.a)

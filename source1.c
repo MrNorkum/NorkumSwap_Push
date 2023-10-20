@@ -1,45 +1,45 @@
 #include "push_swap.h"
 
-void	lstpush(t_lst **lst, int number)
+void	lstpush(lst_t **lst, int number)
 {
-	t_lst	*new;
+	lst_t	*new;
 
-	new = (t_lst *)malloc(sizeof(t_lst));
+	new = (lst_t *)malloc(sizeof(lst_t));
 	if (!lst || !new)
 		return ;
 	new->nbr = number;
-	new -> next = *lst;
+	new->n = *lst;
 	*lst = new;
 }
 
-int	lstpop(t_lst **lst)
+int	lstpop(lst_t **lst)
 {
-	t_lst	*nbrs;
+	lst_t	*nbrs;
 	int		nbr;
 
 	nbrs = (*lst);
 	nbr = nbrs->nbr;
 	free(nbrs);
-	*lst = (*lst)->next;
+	*lst = (*lst)->n;
 	return (nbr);
 }
 
-int	lstsize(t_lst *lst)
+int	lstsize(lst_t *lst)
 {
 	int	i;
 
 	i = 0;
 	while (lst)
 	{
-		lst = lst->next;
+		lst = lst->n;
 		i++;
 	}
 	return (i);
 }
 
-void	lstclear(t_lst **lst)
+void	lstclear(lst_t **lst)
 {
-	t_lst	*nbrs;
+	lst_t	*nbrs;
 
 	if (!lst)
 		return ;
@@ -47,16 +47,16 @@ void	lstclear(t_lst **lst)
 	{
 		nbrs = (*lst);
 		free(nbrs);
-		*lst = (*lst)->next;
+		*lst = (*lst)->n;
 	}
 }
 
-void	free_function(t_ps *ps, int e)
+void	free_function(program_t *x, int e)
 {
-	if (ps->has_split)
-		free_malloc(ps->arr, 0);
-	lstclear(&ps->a);
-	lstclear(&ps->b);
+	if (x->has_split)
+		my_free(x->arr, 0);
+	lstclear(&x->a);
+	lstclear(&x->b);
 	if (e == 1)
 		exit(1);
 }

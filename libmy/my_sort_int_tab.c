@@ -1,11 +1,11 @@
-void	ft_swap(int *a, int *b)
+static void	my_swap(int *a, int *b)
 {
 	*a = *a + *b;
 	*b = *a - *b;
 	*a = *a - *b;
 }
 
-void	ft_sort_int_tab(int *arr, int size)
+void	my_sort_int_tab(int *arr, int size)
 {
 	int	i;
 
@@ -15,7 +15,7 @@ void	ft_sort_int_tab(int *arr, int size)
 		while (++i < size - 1)
 		{
 			if (arr[i] > arr[i + 1])
-				ft_swap(&arr[i], &arr[i + 1]);
+				my_swap(&arr[i], &arr[i + 1]);
 		}
 		size--;
 	}

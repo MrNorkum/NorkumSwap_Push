@@ -1,6 +1,6 @@
-#include <string.h>
+#include <sys/_types/_size_t.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	my_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 

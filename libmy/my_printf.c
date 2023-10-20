@@ -1,13 +1,13 @@
-#include "libft.h"
+#include "libmy.h"
 #include <unistd.h>
 #include <stdint.h>
 
-static inline int	my_putchar(char c, t_printf *x)
+static int	my_putchar(char c, printf_t *x)
 {
 	return (x->len++, write(1, &c, 1));
 }
 
-static inline int	my_putstring(char *s, t_printf *x)
+static int	my_putstring(char *s, printf_t *x)
 {
 	if (!s)
 		s = "(null)";
@@ -17,9 +17,9 @@ static inline int	my_putstring(char *s, t_printf *x)
 	return (1);
 }
 
-static inline int	my_itoa(uintptr_t n, int base, char *s, t_printf *x)
+static int	my_itoa(uintptr_t n, int base, char *s, printf_t *x)
 {
-	int	tab[50];
+	int	arr[50];
 	int	mod;
 	int	i;
 
@@ -37,16 +37,16 @@ static inline int	my_itoa(uintptr_t n, int base, char *s, t_printf *x)
 		return (my_putchar('0', x));
 	while (n)
 	{
-		tab[i++] = n % base;
+		arr[i++] = n % base;
 		n /= base;
 	}
 	while (i--)
-		if (my_putchar(s[tab[i]], x) == -1)
+		if (my_putchar(s[arr[i]], x) == -1)
 			return (-1);
 	return (1);
 }
 
-static inline int	my_format(t_printf *x)
+static int	my_format(printf_t *x)
 {
 	if (x->f == 'c')
 		return (my_putchar(va_arg(x->args, int), x));
@@ -67,9 +67,9 @@ static inline int	my_format(t_printf *x)
 	return (-1);
 }
 
-int	ft_printf(const char *s, ...)
+int	my_printf(const char *s, ...)
 {
-	t_printf	x;
+	printf_t	x;
 
 	x.len = 0;
 	va_start(x.args, s);

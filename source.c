@@ -1,32 +1,32 @@
 #include "push_swap.h"
 
-char	s(t_lst **lst)
+char	swap(lst_t **lst)
 {
-	if (!*lst || !(*lst)->next)
+	if (!*lst || !(*lst)->n)
 		return (10);
-	(*lst)->nbr = (*lst)->nbr + (*lst)->next->nbr;
-	(*lst)->next->nbr = (*lst)->nbr - (*lst)->next->nbr;
-	return ((*lst)->nbr = (*lst)->nbr - (*lst)->next->nbr, 10);
+	(*lst)->nbr = (*lst)->nbr + (*lst)->n->nbr;
+	(*lst)->n->nbr = (*lst)->nbr - (*lst)->n->nbr;
+	return ((*lst)->nbr = (*lst)->nbr - (*lst)->n->nbr, 10);
 }
 
-char	p(t_lst **first, t_lst **second)
+char	push(lst_t **first, lst_t **second)
 {
 	return (lstpush(second, lstpop(first)), 10);
 }
 
-char	r(t_lst *lst)
+char	rev(lst_t *lst)
 {
-	while (lst->next)
+	while (lst->n)
 	{
-		s(&lst);
-		lst = lst->next;
+		swap(&lst);
+		lst = lst->n;
 	}
 	return (10);
 }
 
-char	rr(t_lst *lst)
+char	rev_rotate(lst_t *lst)
 {
-	if (!lst->next)
+	if (!lst->n)
 		return (10);
-	return (rr(lst->next), s(&lst), 10);
+	return (rev_rotate(lst->n), swap(&lst), 10);
 }

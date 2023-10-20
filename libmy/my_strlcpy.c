@@ -1,6 +1,6 @@
-#include "libft.h"
+#include "libmy.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	my_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
@@ -11,5 +11,5 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 			dst[i] = src[i];
 		dst[i] = '\0';
 	}
-	return (ft_strlen(src));
+	return (my_strlen(src));
 }

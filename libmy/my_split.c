@@ -1,14 +1,14 @@
-#include "libft.h"
+#include "libmy.h"
 #include <stdlib.h>
 
-char	**free_malloc(char **tab, size_t i)
+char	**my_free(char **arr, int i)
 {
-	while (tab[i])
-		free(tab[i++]);
-	return (free(tab), NULL);
+	while (arr[i])
+		free(arr[i++]);
+	return (free(arr), NULL);
 }
 
-int	wc(char const *s, char c)
+int	word_count(char const *s, char c)
 {
 	size_t	i;
 
@@ -27,7 +27,7 @@ int	wc(char const *s, char c)
 	return (i);
 }
 
-static int	wlen(char const *s, char c)
+static int	word_len(char const *s, char c)
 {
 	int	len;
 
@@ -39,7 +39,7 @@ static int	wlen(char const *s, char c)
 	return (len);
 }
 
-char	**ft_split(char const *s, char c)
+char	**my_split(char const *s, char c)
 {
 	char	**res;
 	int		a;
@@ -47,17 +47,17 @@ char	**ft_split(char const *s, char c)
 
 	a = -1;
 	i = 0;
-	res = (char **)malloc(sizeof(char *) * (wc(s, c) + 1));
+	res = (char **)malloc(sizeof(char *) * (word_count(s, c) + 1));
 	if (!s || !res)
 		return (NULL);
-	while (++a < wc(s, c))
+	while (++a < word_count(s, c))
 	{
 		while (s[i] && s[i] == c)
 			i++;
-		res[a] = ft_substr(s, i, wlen(&s[i], c));
+		res[a] = my_substr(s, i, word_len(&s[i], c));
 		if (!res[a])
-			return (free_malloc(res, 0));
-		i += wlen(&s[i], c);
+			return (my_free(res, 0));
+		i += word_len(&s[i], c);
 	}
 	return (res[a] = NULL, res);
 }

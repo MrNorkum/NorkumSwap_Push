@@ -1,119 +1,119 @@
 #include "push_swap.h"
 
-void	sort(t_ps *ps, int len)
+void	sort(program_t *x, int len)
 {
 	int	a;
 	int	b;
 	int	c;
 
-	if (len == 2 && ps->a->nbr > ps->a->next->nbr)
-		ft_printf("sa%c", s(&ps->a));
+	if (len == 2 && x->a->nbr > x->a->n->nbr)
+		my_printf("sa%c", swap(&x->a));
 	if (len == 3)
 	{
-		a = ps->a->nbr;
-		b = ps->a->next->nbr;
-		c = ps->a->next->next->nbr;
+		a = x->a->nbr;
+		b = x->a->n->nbr;
+		c = x->a->n->n->nbr;
 		if (a < b && b < c)
 			return ;
 		if (a < b && a > c)
-			return (ft_printf("rra%c", rr(ps->a)), sort(ps, 3));
+			return (my_printf("rra%c", rev_rotate(x->a)), sort(x, 3));
 		if (a > c && c > b)
-			return (ft_printf("ra%c", r(ps->a)), sort(ps, 3));
-		return (ft_printf("sa%c", s(&ps->a)), sort(ps, 3));
+			return (my_printf("ra%c", rev(x->a)), sort(x, 3));
+		return (my_printf("sa%c", swap(&x->a)), sort(x, 3));
 	}
 }
 
-void	quicksort_3a(t_lst **lst, int len)
+void	quicksort_3a(lst_t **lst, int len)
 {
 	while (len == 2 || !is_sorted(*lst, 'a', 3))
 	{
-		if ((*lst)->nbr > (*lst)->next->nbr)
-			ft_printf("sa%c", s(lst));
+		if ((*lst)->nbr > (*lst)->n->nbr)
+			my_printf("sa%c", swap(lst));
 		else if (len == 3)
-			ft_printf("ra%csa%crra%c", r(*lst), s(lst), rr(*lst));
+			my_printf("ra%csa%crra%c", rev(*lst), swap(lst), rev_rotate(*lst));
 		if (len == 2)
 			return ;
 	}
 }
 
-void	quicksort_3b(t_ps *ps, int len)
+void	quicksort_3b(program_t *x, int len)
 {
 	if (len == 1)
-		ft_printf("pa%c", p(&ps->b, &ps->a));
+		my_printf("pa%c", push(&x->b, &x->a));
 	else if (len == 2)
 	{
-		if (ps->b->nbr < ps->b->next->nbr)
-			ft_printf("sb%c", s(&ps->b));
+		if (x->b->nbr < x->b->n->nbr)
+			my_printf("sb%c", swap(&x->b));
 		while (len--)
-			ft_printf("pa%c", p(&ps->b, &ps->a));
+			my_printf("pa%c", push(&x->b, &x->a));
 	}
 	else if (len == 3)
 	{
 		while (len)
 		{
-			if (len == 1 && ps->a->nbr > ps->a->next->nbr)
-				ft_printf("sa%c", s(&ps->a));
-			else if (len == 1 || (len >= 2 && ps->b->nbr > ps->b->next->nbr)
-				|| (len == 3 && ps->b->nbr > ps->b->next->next->nbr))
-				ft_printf("pa%c", p(&ps->b, &ps->a) * (--len != -1));
+			if (len == 1 && x->a->nbr > x->a->n->nbr)
+				my_printf("sa%c", swap(&x->a));
+			else if (len == 1 || (len >= 2 && x->b->nbr > x->b->n->nbr)
+				|| (len == 3 && x->b->nbr > x->b->n->n->nbr))
+				my_printf("pa%c", push(&x->b, &x->a) * (--len != -1));
 			else
-				ft_printf("sb%c", s(&ps->b));
+				my_printf("sb%c", swap(&x->b));
 		}
 	}
 	return ;
 }
 
-int	quicksort_b(t_ps *ps, int len, int count)
+int	quicksort_b(program_t *x, int len, int count)
 {
 	int	pivot;
 	int	items;
 
-	if (!count && is_sorted(ps->b, 'b', len))
+	if (!count && is_sorted(x->b, 'b', len))
 		while (len--)
-			ft_printf("pa%c", p(&ps->b, &ps->a));
+			my_printf("pa%c", push(&x->b, &x->a));
 	if (len <= 3)
-		return (quicksort_3b(ps, len), 1);
+		return (quicksort_3b(x, len), 1);
 	items = len;
-	if (!get_middle(&pivot, ps->b, len))
+	if (!get_middle(&pivot, x->b, len))
 		return (0);
 	while (len != items / 2)
 	{
-		if (ps->b->nbr >= pivot && len--)
-			ft_printf("pa%c", p(&ps->b, &ps->a));
+		if (x->b->nbr >= pivot && len--)
+			my_printf("pa%c", push(&x->b, &x->a));
 		else if (++count)
-			ft_printf("rb%c", r(ps->b));
+			my_printf("rb%c", rev(x->b));
 	}
-	while (items / 2 != lstsize(ps->b) && count--)
-		ft_printf("rrb%c", rr(ps->b));
-	return (quicksort_a(ps, items / 2 + items % 2, 0)
-		&& quicksort_b(ps, items / 2, 0));
+	while (items / 2 != lstsize(x->b) && count--)
+		my_printf("rrb%c", rev_rotate(x->b));
+	return (quicksort_a(x, items / 2 + items % 2, 0)
+		&& quicksort_b(x, items / 2, 0));
 }
 
-int	quicksort_a(t_ps *ps, int len, int count)
+int	quicksort_a(program_t *x, int len, int count)
 {
 	int	pivot;
 	int	items;
 
-	if (is_sorted(ps->a, 'a', len))
+	if (is_sorted(x->a, 'a', len))
 		return (1);
 	items = len;
 	if (len <= 3)
 	{
-		if (lstsize(ps->a) == 3)
-			return (sort(ps, 3), 1);
-		return (quicksort_3a(&ps->a, len), 1);
+		if (lstsize(x->a) == 3)
+			return (sort(x, 3), 1);
+		return (quicksort_3a(&x->a, len), 1);
 	}
-	if (!get_middle(&pivot, ps->a, len))
+	if (!get_middle(&pivot, x->a, len))
 		return (0);
 	while (len != items / 2 + items % 2)
 	{
-		if (ps->a->nbr < pivot && (len--))
-			ft_printf("pb%c", p(&ps->a, &ps->b));
+		if (x->a->nbr < pivot && (len--))
+			my_printf("pb%c", push(&x->a, &x->b));
 		else if (++count)
-			ft_printf("ra%c", r(ps->a));
+			my_printf("ra%c", rev(x->a));
 	}
-	while (items / 2 + items % 2 != lstsize(ps->a) && count--)
-		ft_printf("rra%c", rr(ps->a));
-	return (quicksort_a(ps, items / 2 + items % 2, 0)
-		&& quicksort_b(ps, items / 2, 0));
+	while (items / 2 + items % 2 != lstsize(x->a) && count--)
+		my_printf("rra%c", rev_rotate(x->a));
+	return (quicksort_a(x, items / 2 + items % 2, 0)
+		&& quicksort_b(x, items / 2, 0));
 }
