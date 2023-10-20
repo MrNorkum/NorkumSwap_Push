@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "swap_push.h"
 
 char	swap(lst_t **lst)
 {
