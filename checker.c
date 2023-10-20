@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "swap_push.h"
 
 static int	first_part(program_t *x, char *line)
 {
