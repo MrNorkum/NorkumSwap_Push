@@ -1,7 +1,7 @@
-NAME = push_swap.a
+NAME = swap_push.a
 BONUS = checker
 BONUS_SRC = checker.c
-PUSH_SWAP = push_swap
+PUSH_SWAP = swap_push
 MAIN_SRC = main.c
 LIBMY_PATH = ./libmy
 LIBMY = $(LIBMY_PATH)/libmy.a
