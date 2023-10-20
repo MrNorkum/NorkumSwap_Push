@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "swap_push.h"
 
 void	lstpush(lst_t **lst, int number)
 {
