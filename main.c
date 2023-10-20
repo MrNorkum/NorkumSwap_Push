@@ -1,6 +1,6 @@
-#include "push_swap.h"
+#include "swap_push.h"
 
-static inline void	push_swap(program_t *x)
+static inline void	swap_push(program_t *x)
 {
 	int	i;
 	int	num;
@@ -50,13 +50,13 @@ int	main(int ac, char **av)
 		x.arr = av + 1;
 		x.count = ac - 1;
 	}
-	return (push_swap(&x), free_function(&x, 0), 0);
+	return (swap_push(&x), free_function(&x, 0), 0);
 }
 
-/*while (ps.a)
-        ft_printf("%d\n", lstpop(&ps.a));
-    ft_printf("-\na\n\n");
-    while (ps.b)
-        ft_printf("%d\n", lstpop(&ps.b));
-    ft_printf("-\nb\n");
+/*while (x.a)
+        my_printf("%d\n", lstpop(&x.a));
+    my_printf("-\na\n\n");
+    while (x.b)
+        my_printf("%d\n", lstpop(&x.b));
+    my_printf("-\nb\n");
 */
