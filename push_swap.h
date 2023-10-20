@@ -1,5 +1,5 @@
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef SWAP_PUSH_H
+# define SWAP_PUSH_H
 
 # include "libmy/libmy.h"
 # include <stdlib.h>
