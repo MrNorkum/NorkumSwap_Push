@@ -18,9 +18,9 @@ int	lstpop(lst_t **lst)
 	int		nbr;
 
 	nbrs = (*lst);
+	*lst = (*lst)->n;
 	nbr = nbrs->nbr;
 	free(nbrs);
-	*lst = (*lst)->n;
 	return (nbr);
 }
 
